@@ -1,6 +1,6 @@
 # gsoft-ai-wc-assistant
 
-Assistente alla vendita AI per WooCommerce: una **piattaforma SaaS** (Laravel + Postgres) che raccoglie gli eventi dei siti, costruisce il profilo di ogni cliente (cross-device) e serve raccomandazioni/chat, piu' un **plugin WooCommerce** da distribuire.
+Assistente alla vendita AI per WooCommerce: una **piattaforma SaaS** (Laravel + MariaDB) che raccoglie gli eventi dei siti, costruisce il profilo di ogni cliente (cross-device) e serve raccomandazioni/chat, piu' un **plugin WooCommerce** da distribuire.
 
 ```
 /platform   Laravel 11 (API, worker, dashboard)
@@ -39,7 +39,7 @@ Ogni richiesta del plugin invia:
 
 ## Deploy su Plesk (Laravel Toolkit)
 
-Requisiti server: PHP >= 8.2 (`pdo_pgsql`, `mbstring`, `openssl`), PostgreSQL. L'estensione **pgvector** servira' dalla Fase 3 (embedding prodotti): va installata sul server Postgres (`CREATE EXTENSION vector`, richiede privilegi superuser).
+Requisiti server: PHP >= 8.2 (`pdo_mysql`, `mbstring`, `openssl`), MariaDB 10.6+ (quella gia' presente su Plesk; crea database e utente dedicati). Gli embedding della Fase 3 non richiedono estensioni: vengono salvati su colonna JSON e la similarita' e' calcolata in PHP sui candidati.
 
 1. Plesk > Laravel > aggiungi applicazione da Git, **document root `platform/public`**, directory applicazione `platform`.
 2. Imposta le variabili ambiente copiando `platform/.env.example` (genera `APP_KEY` dal Toolkit o con `php artisan key:generate`; imposta `GSAI_EMAIL_SALT` con un valore casuale e **non cambiarlo piu'**).
