@@ -1,0 +1,1 @@
+# gsoft-ai-wc-assistant
